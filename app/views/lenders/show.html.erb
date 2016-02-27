@@ -1,0 +1,66 @@
+<a href="/users/destroy">Logout</a>
+
+<p>Name: <%= @lender.first_name %> <%= @lender.last_name %></p>
+<p>Account Balance: <%= @lender.money-@lent %> </p>
+
+<h3>List of People in need of help</h3>
+<table>
+	<th>
+		<tr>
+			<td>Name</td>
+			<td>Purpose</td>
+			<td>Description</td>
+			<td>Amount Needed</td>
+			<td>Amount Raised</td>
+			<td>Action</td>
+		</tr>
+	</th>
+	<% if @borrowers %>
+		<% @borrowers.each do |x| %>
+	<tr>
+		<td><%= x.first_name %> <%= x.last_name %></td>
+		<td><%= x.purpose %></td>
+		<td><%= x.description %></td>
+		<td><%= x.money %></td>
+		<td><%= x.raised %></td>
+		<td><form action="/historys/<%= x.id %>" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				amount: <input type="text" name="amount">
+				<input type="submit" value="Lend">
+		</form></td>
+	</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<% if flash[:no_money] %>
+	<p style="color:red;"><%= flash[:no_money] %></p>
+<% end %>
+
+<h3>List of People you lend money to</h3>
+
+<table>
+	<th>
+		<tr>
+			<td>Name</td>
+			<td>Purpose</td>
+			<td>Description</td>
+			<td>Amount Needed</td>
+			<td>Amount Raised</td>
+			<td>Amount Left</td>
+		</tr>
+	</th>
+	<% if @loaned %>
+		<% @loaned.each do |z| %>
+	<tr>
+		<td><%= z.borrower.first_name %> <%= z.borrower.last_name %></td>
+		<td><%= z.borrower.purpose %></td>
+		<td><%= z.borrower.description %></td>
+		<td><%= z.borrower.money %></td>
+		<td><%= z.borrower.raised %></td>
+		<td><%= z.amount %></td>
+	</tr>
+	<% end %>
+	<% end %>
+
+</table>

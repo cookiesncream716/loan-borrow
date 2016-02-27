@@ -1,0 +1,14 @@
+
+<h1>Log In</h1>
+<form action="/users/create" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<p>Email: <input type="text" name="user[email]"></p>
+	<p>Password: <input type="text" name="user[password]"></p>
+	<p><input type="submit" name="Log In"></p>
+</form>
+
+<% if flash[:error] %>
+	<p><%= flash[:error] %></p>
+<% end %>
+
+<a href="/lenders/index">Click here to Register</a>
