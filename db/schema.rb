@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20160227182219) do
     t.integer  "money"
     t.string   "purpose"
     t.text     "description"
-    t.integer  "raised"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "raised",          default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "histories", force: :cascade do |t|

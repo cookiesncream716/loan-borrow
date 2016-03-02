@@ -8,7 +8,7 @@ class CreateBorrowers < ActiveRecord::Migration
       t.integer :money
       t.string :purpose
       t.text :description
-      t.integer :raised
+      t.integer :raised, default: 0
 
       t.timestamps null: false
     end
