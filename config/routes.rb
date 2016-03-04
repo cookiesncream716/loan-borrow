@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   get '/' => 'user#index'
-   get '/users/new' => 'user#new'
-   post '/users/create' => 'user#create'
-   get '/users/destroy' => 'user#destroy'
+  get '/users/new' => 'user#new'
+  post '/users/create' => 'user#create'
+  delete '/users/:id' => 'user#destroy'
 
    get '/lenders/index' => 'lenders#index'
    post '/lenders/create' => 'lenders#create'

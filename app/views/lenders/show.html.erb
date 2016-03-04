@@ -1,66 +1,69 @@
-<a href="/users/destroy">Logout</a>
+<div class="container">
+	<div class="borrower">
+		<h2>Name: <%= @lender.first_name %> <%= @lender.last_name %></h2>
+		<h3>Account Balance: <%= @lender.money-@lent %> </h3>
+	</div>
+	<div class="borrower">
+		<h4>List of People in need of help</h4>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Purpose</th>
+					<th>Description</th>
+					<th>Amount Needed</th>
+					<th>Amount Raised</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<% if @borrowers %>
+				<% @borrowers.each do |x| %>
+			<tr>
+				<td><%= x.first_name %> <%= x.last_name %></td>
+				<td><%= x.purpose %></td>
+				<td><%= x.description %></td>
+				<td><%= x.money %></td>
+				<td><%= x.raised %></td>
+				<td><form action="/historys/<%= x.id %>" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						amount: <input type="text" name="amount">
+						<input type="submit" value="Lend">
+				</form></td>
+			</tr>
+				<% end %>
+			<% end %>
+		</table>
 
-<p>Name: <%= @lender.first_name %> <%= @lender.last_name %></p>
-<p>Account Balance: <%= @lender.money-@lent %> </p>
-
-<h3>List of People in need of help</h3>
-<table>
-	<th>
-		<tr>
-			<td>Name</td>
-			<td>Purpose</td>
-			<td>Description</td>
-			<td>Amount Needed</td>
-			<td>Amount Raised</td>
-			<td>Action</td>
-		</tr>
-	</th>
-	<% if @borrowers %>
-		<% @borrowers.each do |x| %>
-	<tr>
-		<td><%= x.first_name %> <%= x.last_name %></td>
-		<td><%= x.purpose %></td>
-		<td><%= x.description %></td>
-		<td><%= x.money %></td>
-		<td><%= x.raised %></td>
-		<td><form action="/historys/<%= x.id %>" method="post">
-				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-				amount: <input type="text" name="amount">
-				<input type="submit" value="Lend">
-		</form></td>
-	</tr>
+		<% if flash[:no_money] %>
+			<p class="errors"><%= flash[:no_money] %></p>
 		<% end %>
-	<% end %>
-</table>
 
-<% if flash[:no_money] %>
-	<p style="color:red;"><%= flash[:no_money] %></p>
-<% end %>
+		<h4>List of People you lend money to</h4>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Purpose</th>
+					<th>Description</th>
+					<th>Amount Needed</th>
+					<th>Amount Raised</th>
+					<th>Amount Lent</th>
+				</tr>
+			</thead>
+			<% if @loaned %>
+				<% @loaned.each do |z| %>
+			<tr>
+				<td><%= z.borrower.first_name %> <%= z.borrower.last_name %></td>
+				<td><%= z.borrower.purpose %></td>
+				<td><%= z.borrower.description %></td>
+				<td><%= z.borrower.money %></td>
+				<td><%= z.borrower.raised %></td>
+				<td><%= z.amount %></td>
+			</tr>
+			<% end %>
+			<% end %>
 
-<h3>List of People you lend money to</h3>
-
-<table>
-	<th>
-		<tr>
-			<td>Name</td>
-			<td>Purpose</td>
-			<td>Description</td>
-			<td>Amount Needed</td>
-			<td>Amount Raised</td>
-			<td>Amount Left</td>
-		</tr>
-	</th>
-	<% if @loaned %>
-		<% @loaned.each do |z| %>
-	<tr>
-		<td><%= z.borrower.first_name %> <%= z.borrower.last_name %></td>
-		<td><%= z.borrower.purpose %></td>
-		<td><%= z.borrower.description %></td>
-		<td><%= z.borrower.money %></td>
-		<td><%= z.borrower.raised %></td>
-		<td><%= z.amount %></td>
-	</tr>
-	<% end %>
-	<% end %>
-
-</table>
+		</table>
+		<a href="/users/<%= session[:user_id]%>" data-method="delete" class="btn btn-success" role="button">Logout</a>
+	</div>
+</div>

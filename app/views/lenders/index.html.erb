@@ -1,35 +1,85 @@
-<h1>Lender</h1>
-<form action="/lenders/create" method="post">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<p>First Name: <input type="text" name="lender[first_name]"></p>
-	<p>Last Name: <input type="text" name="lender[last_name]"></p>
-	<p>Email: <input type="text" name="lender[email]"></p>
-	<p>Password: <input type="text" name="lender[password]"></p>
-	<p>* Password should be at least 8 characters long</p>
-	<p>Password Confirmation: <input type="text" name="lender[password_confirmation]"></p>
-	<p>Money: <input type="integer" name="lender[money]"></p>
-	<p><input type="submit" value="Register"></p>
-</form>
-<a href="/">Already a member?</a>
+<div class="container">
+	<div class="register col-lg-offset-1 col-lg-4">
+		<h1>Register as a Lender</h1>
+		<form role="form" action="/lenders/create" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<div class="form-group">
+				<label for="first_name">First Name:</label>
+				<input type="text" class="form-control" id="first_name" name="lender[first_name]">
+			</div>
+			<div class="form-group">
+				<label for="last_name">Last Name:</label>
+				<input type="text" class="form-control" id="last_name" name="lender[last_name]">
+			</div>
+			<div class="form-group">
+				<label for="email">Email address:</label>
+				<input type="email" class="form-control" id="email" name="lender[email]">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="pwd" name="lender[password]">
+				<p>* Password should be at least 8 characters long</p>
+			</div>
+			<div class="form-group">
+				<label for="password_confirmation">Password Confirmation:</label>
+				<input type="text" class="form-control" id="password_confirmation" name="lender[password_confirmation]">
+			</div>
+			<div class="form-group">
+				<label for="money">Amount Available to Lend:</label>
+				<input type="integer" class="form-control" id="money" name="lender[money]">
+			</div>
+			<button type="submit" class="btn btn-default">Register</button>
+		</form>
 
-<% if flash[:errors] %>
-	<% flash[:errors].each do |err| %>
-		<p><%= err %></p>
-	<% end %>
-<% end %>
+		
+		<a href="/">Already a member?</a>
 
-<h1>Borrower</h1>
-<form action="/borrowers/create" method="post">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<p>First Name: <input type="text" name="borrower[first_name]"></p>
-	<p>Last Name: <input type="text" name="borrower[last_name]"></p>
-	<p>Email: <input type="text" name="borrower[email]"></p>
-	<p>Password: <input type="text" name="borrower[password]"></p>
-	<p>* Password should be at least 8 characters long</p>
-	<p>Password Confirmation: <input type="text" name="borrower[password_confirmation]"></p>
-	<p>Need Money For: <input type="integer" name="borrower[purpose]"></p>
-	<p>Description:<input type="text" name="borrower[description]"></p>
-	<p>Amount Needed: <input type="integer" name="borrower[money]"></p>
-	<p><input type="submit" value="Register"></p>
-</form>
-<a href="/">Already a member?</a>
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |err| %>
+				<p class="errors"><%= err %></p>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="register col-lg-offset-1 col-lg-5" id="reg_borrow">
+		<h1>Register as a Borrower</h1>
+		<form role="form" action="/borrowers/create" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<div class="form-group">
+				<label for="first_name">First Name:</label>
+				<input type="text" class="form-control" id="first_name" name="borrower[first_name]">
+			</div>
+			<div class="form-group">
+				<label for="last_name">Last Name:</label>
+				<input type="text" class="form-control" id="last_name" name="borrower[last_name]">
+			</div>
+			<div class="form-group">
+				<label for="email">Email address:</label>
+				<input type="email" class="form-control" id="email" name="borrower[email]">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="pwd" name="borrower[password]">
+				<p>* Password should be at least 8 characters long</p>
+			</div>
+			<div class="form-group">
+				<label for="password_confirmation">Password Confirmation:</label>
+				<input type="text" class="form-control" id="password_confirmation" name="borrower[password_confirmation]">
+			</div>
+			<div class="form-group">
+				<label for="money">Amount Needed:</label>
+				<input type="integer" class="form-control" id="money" name="borrower[money]">
+			</div>
+			<div class="form-group">
+				<label for="purpose">Purpose:</label>
+				<input type="text" class="form-control" id="purpose" name="borrower[purpose]">
+			</div>
+			<div class="form-group">
+				<label for="description">Description:</label>
+				<input type="text" class="form-control" id="description" name="borrower[description]">
+			</div>
+			<button type="submit" class="btn btn-default">Register</button>
+		</form>
+		<a href="/">Already a member?</a>
+	</div>
+</div>
+

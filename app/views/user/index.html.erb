@@ -1,14 +1,24 @@
-
-<h1>Log In</h1>
-<form action="/users/create" method="post">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<p>Email: <input type="text" name="user[email]"></p>
-	<p>Password: <input type="text" name="user[password]"></p>
-	<p><input type="submit" name="Log In"></p>
-</form>
-
-<% if flash[:error] %>
-	<p><%= flash[:error] %></p>
-<% end %>
-
-<a href="/lenders/index">Click here to Register</a>
+<div class="container">
+	<div id="login">
+		<h1>Online Lending</h1>
+		<h3 class="col-lg-offset-4">Log In</h3>
+	</div>
+	<div id="login_form" class="col-lg-offset-4 col-lg-4">
+		<form role="form" action="/users/create" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<div class="form-group">
+				<label for="email">Email address:</label>
+				<input type="email" class="form-control" id="email" name="user[email]">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="pwd" name="user[password]">
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+		<% if flash[:error] %>
+			<p class="errors"><%= flash[:error] %></p>
+		<% end %>
+		<a href="/lenders/index">Click here to Register</a>
+	</div>
+</div>

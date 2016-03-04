@@ -14,7 +14,7 @@ class UserController < ApplicationController
 				flash[:error] = "Invalid"
 				redirect_to "/"
 			end
-		else
+		elsif
 			user = Borrower.find_by(email: params["user"][:email])
 			if user
 				if user && user.authenticate(params["user"][:password])
@@ -26,6 +26,9 @@ class UserController < ApplicationController
 					redirect_to "/"
 				end
 			end
+		else
+			flash[:error] = "Invalid"
+			redirect_to "/"
 		end
 	end
 

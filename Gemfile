@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'hirb'
 
-gem 'rails-footnotes', '>=4.0.0', '<5'
+# gem 'rails-footnotes', '>=4.0.0', '<5'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
